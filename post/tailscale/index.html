@@ -1,0 +1,273 @@
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="zh-cn"
+  dir="ltr"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容 - whitebalance blog</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
+
+前置准备
+需要准备：
+
+Tailscale（用于身份认证和管理）
+域名（指向你的 VPS）
+Let&rsquo;s Encrypt / acme.sh 证书（用于 HTTPS）
+
+
+Step 1：在 VPS 上安装 Tailscale
+首先，在 VPS 上安装并启动 Tailscale：
+# 安装 Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+
+# 启动并登录
+tailscale up
+Step 2:使用 Docker 安装 Derper
+可以选择 docker run  或 docker compose 两种方式部署
+方法一：
+docker run \
+--name derper \
+-e DERP_DOMAIN=123.com \
+-e DERP_CERT_MODE=manual \
+-e DERP_STUN=true \
+-e DERP_VERIFY_CLIENTS=true \
+-v /root/.acme.sh/123.com_ecc/:/app/certs \
+-v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \
+-p 23443:443 \
+-p 2380:80 \
+-p 3478:3478/udp \
+fredliang/derper
+参数说明:
+DERP_DOMAIN：你的域名" />
+  <meta name="author" content="whitebalance blog" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+
+  
+
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.148.2">
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="http://localhost:1313/"
+      >whitebalance blog</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  >
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容</h1><div class="text-xs antialiased opacity-60"><time>Aug 19, 2025</time></div></header>
+
+  <section><p>在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 <strong>自建 DERP 节点</strong>，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。</p>
+<hr>
+<h2 id="前置准备">前置准备</h2>
+<p>需要准备：</p>
+<ul>
+<li><strong>Tailscale</strong>（用于身份认证和管理）</li>
+<li><strong>域名</strong>（指向你的 VPS）</li>
+<li><strong>Let&rsquo;s Encrypt / acme.sh 证书</strong>（用于 HTTPS）</li>
+</ul>
+<hr>
+<h2 id="step-1在-vps-上安装-tailscale">Step 1：在 VPS 上安装 Tailscale</h2>
+<p>首先，在 VPS 上安装并启动 <code>Tailscale</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 安装 Tailscale</span>
+</span></span><span style="display:flex;"><span>curl -fsSL https://tailscale.com/install.sh | sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 启动并登录</span>
+</span></span><span style="display:flex;"><span>tailscale up
+</span></span></code></pre></div><h2 id="step-2使用-docker-安装-derper">Step 2:使用 Docker 安装 Derper</h2>
+<p>可以选择 docker run  或 <code>docker compose</code> 两种方式部署</p>
+<p>方法一：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ae81ff">docker run \</span>
+</span></span><span style="display:flex;"><span>--<span style="color:#ae81ff">name derper \</span>
+</span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">e DERP_DOMAIN=123.com \</span>
+</span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">e DERP_CERT_MODE=manual \</span>
+</span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">e DERP_STUN=true \</span>
+</span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">e DERP_VERIFY_CLIENTS=true \</span>
+</span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">v /root/.acme.sh/123.com_ecc/:/app/certs \</span>
+</span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \</span>
+</span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">p 23443:443 \</span>
+</span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">p 2380:80 \</span>
+</span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">p 3478:3478/udp \</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">fredliang/derper</span>
+</span></span></code></pre></div><p>参数说明:
+DERP_DOMAIN：你的域名</p>
+<p>DERP_CERT_MODE=manual：手动证书模式</p>
+<p>DERP_STUN=true：开启 STUN</p>
+<p>DERP_VERIFY_CLIENTS=true：验证客户端身份，防止被白嫖</p>
+<p>-v 挂载目录：证书路径、Tailscale socket</p>
+<p>-p 端口映射：3478（UDP 最好不要修改），Derper 必须要 443 和 80 端口，而这些端口很容易被网站、Trojan 代理占用，所以使用 Docker 部署，可以自定义为 23443、2380 或其他</p>
+<p>方法二：使用 Docker Compose</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">derper</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">fredliang/derper</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">DERP_DOMAIN=123.com</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">DERP_CERT_MODE=manual</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">DERP_STUN=true</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">DERP_VERIFY_CLIENTS=true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/root/.acme.sh/123.com_ecc/:/app/certs</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">12443</span>:<span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">1280</span>:<span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">3478</span>:<span style="color:#ae81ff">3478</span><span style="color:#ae81ff">/udp</span>
+</span></span></code></pre></div><p>启动服务： docker compose up -d</p>
+<p><strong>注意：容器内 derper 默认会找 xxx.crt 和 xxx.key，但实际可能只有 .cer 文件</strong></p>
+<p>解决方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -l /root/.acme.sh/123.com_ecc/
+</span></span></code></pre></div><p>找到 fullchain.cer
+软连接：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ln -s fullchain.cer 123.com.crt
+</span></span></code></pre></div><p><strong>再次启动容器</strong></p>
+<h2 id="step-3-进入-tailscale-控制台---access-controls选择-json-editor-模式修改-或-新增-derpmap">Step 3: 进入 Tailscale 控制台 - Access controls，选择 JSON editor 模式，<strong>修改</strong> 或 <strong>新增</strong> derpMap</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;derpMap&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;OmitDefaultRegions&#34;</span>: true, // 设置为 True 则丢弃所有 Tailscale 官方中转节点，只使用自己的 VPS
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Regions&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;900&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;RegionID&#34;</span>:   900, // tailscale 900-999 是保留给自定义 derper
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;RegionCode&#34;</span>: <span style="color:#e6db74">&#34;HK&#34;</span>, // 随便命名
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;RegionName&#34;</span>: <span style="color:#e6db74">&#34;HK123&#34;</span>, // 随便命名
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;Nodes&#34;</span>: <span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;Name&#34;</span>:             <span style="color:#e6db74">&#34;AAA&#34;</span>, // 随便命名
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;RegionID&#34;</span>:         900,
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;Hostname&#34;</span>:         <span style="color:#e6db74">&#34;123.com&#34;</span>, // 你的 VPS 域名 
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;DERPPort&#34;</span>:         23443, //上面 Docker 自定义的端口
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;InsecureForTests&#34;</span>: true, // 因为是自签名证书，所以客户端不做校验
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>,
+</span></span></code></pre></div><h2 id="测试">测试</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Tailscale netcheck
+</span></span></code></pre></div><p>看到有 VPS RegionName 即可</p>
+<p>也可以 tailscale ping xxxx 测试一下</p>
+</section>
+
+  </article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">&copy;2025
+    <a class="link" href="http://localhost:1313/">whitebalance blog</a></div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>
