@@ -30,8 +30,8 @@
 前置准备
 需要准备：
 
-Tailscale（用于身份认证和管理）
-域名（指向你的 VPS）
+Tailscale 账户（用于身份认证和管理）
+域名（纯 IP DERP 中继无法防止白嫖）
 Let&rsquo;s Encrypt / acme.sh 证书（用于 HTTPS）
 
 
@@ -43,7 +43,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 # 启动并登录
 tailscale up
 Step 2:使用 Docker 安装 Derper
-可以选择 docker run  或 docker compose 两种方式部署
+可以选择  docker run 或 docker compose 两种方式部署
 方法一：
 docker run \
 --name derper \
@@ -59,10 +59,10 @@ docker run \
 fredliang/derper
 参数说明:
 DERP_DOMAIN：你的域名" />
-  <meta name="author" content="whitebalance blog" /><link rel="preload stylesheet" as="style" href="https://whitebalance.github.io/main.min.css" />
+  <meta name="author" content="whitebalance blog" /><link rel="preload stylesheet" as="style" href="https://WhiteBalance2800K.github.io/main.min.css" />
 
   
-  <link rel="preload" as="image" href="https://whitebalance.github.io/theme.png" />
+  <link rel="preload" as="image" href="https://WhiteBalance2800K.github.io/theme.png" />
 
   
 
@@ -70,36 +70,36 @@ DERP_DOMAIN：你的域名" />
 
   <script
     defer
-    src="https://whitebalance.github.io/highlight.min.js"
+    src="https://WhiteBalance2800K.github.io/highlight.min.js"
     onload="hljs.initHighlightingOnLoad();"
   ></script>
 
   
   <link
     rel="icon"
-    href="https://whitebalance.github.io/favicon.ico"
+    href="https://WhiteBalance2800K.github.io/favicon.ico"
   />
   <link
     rel="apple-touch-icon"
-    href="https://whitebalance.github.io/apple-touch-icon.png"
+    href="https://WhiteBalance2800K.github.io/apple-touch-icon.png"
   />
 
   <meta name="generator" content="Hugo 0.148.2">
   <meta itemprop="name" content="VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容">
   <meta itemprop="description" content="在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
 前置准备 需要准备：
-Tailscale（用于身份认证和管理） 域名（指向你的 VPS） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale：
+Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale：
 # 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署
 方法一：
 docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \ -e DERP_STUN=true \ -e DERP_VERIFY_CLIENTS=true \ -v /root/.acme.sh/123.com_ecc/:/app/certs \ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \ -p 23443:443 \ -p 2380:80 \ -p 3478:3478/udp \ fredliang/derper 参数说明: DERP_DOMAIN：你的域名">
   <meta itemprop="datePublished" content="2025-08-19T10:11:04+08:00">
   <meta itemprop="dateModified" content="2025-08-19T10:11:04+08:00">
-  <meta itemprop="wordCount" content="257"><meta property="og:url" content="https://whitebalance.github.io/post/tailscale/">
+  <meta itemprop="wordCount" content="260"><meta property="og:url" content="https://WhiteBalance2800K.github.io/post/tailscale/">
   <meta property="og:site_name" content="whitebalance blog">
   <meta property="og:title" content="VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容">
   <meta property="og:description" content="在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
 前置准备 需要准备：
-Tailscale（用于身份认证和管理） 域名（指向你的 VPS） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale：
+Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale：
 # 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署
 方法一：
 docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \ -e DERP_STUN=true \ -e DERP_VERIFY_CLIENTS=true \ -v /root/.acme.sh/123.com_ecc/:/app/certs \ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \ -p 23443:443 \ -p 2380:80 \ -p 3478:3478/udp \ fredliang/derper 参数说明: DERP_DOMAIN：你的域名">
@@ -113,12 +113,12 @@ docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \
   <meta name="twitter:title" content="VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容">
   <meta name="twitter:description" content="在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
 前置准备 需要准备：
-Tailscale（用于身份认证和管理） 域名（指向你的 VPS） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale：
+Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale：
 # 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署
 方法一：
 docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \ -e DERP_STUN=true \ -e DERP_VERIFY_CLIENTS=true \ -v /root/.acme.sh/123.com_ecc/:/app/certs \ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \ -p 23443:443 \ -p 2380:80 \ -p 3478:3478/udp \ fredliang/derper 参数说明: DERP_DOMAIN：你的域名">
 
-  <link rel="canonical" href="https://whitebalance.github.io/post/tailscale/" />
+  <link rel="canonical" href="https://WhiteBalance2800K.github.io/post/tailscale/" />
 </head>
 <body
     class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
@@ -128,7 +128,7 @@ docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \
   <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
     <a
       class="-translate-y-[1px] text-2xl font-medium"
-      href="https://whitebalance.github.io/"
+      href="https://WhiteBalance2800K.github.io/"
       >whitebalance blog</a
     >
     <div
@@ -203,8 +203,8 @@ docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \
 <h2 id="前置准备">前置准备</h2>
 <p>需要准备：</p>
 <ul>
-<li><strong>Tailscale</strong>（用于身份认证和管理）</li>
-<li><strong>域名</strong>（指向你的 VPS）</li>
+<li><strong>Tailscale 账户</strong>（用于身份认证和管理）</li>
+<li><strong>域名</strong>（纯 IP DERP 中继无法防止白嫖）</li>
 <li><strong>Let&rsquo;s Encrypt / acme.sh 证书</strong>（用于 HTTPS）</li>
 </ul>
 <hr>
@@ -216,7 +216,7 @@ docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 启动并登录</span>
 </span></span><span style="display:flex;"><span>tailscale up
 </span></span></code></pre></div><h2 id="step-2使用-docker-安装-derper">Step 2:使用 Docker 安装 Derper</h2>
-<p>可以选择 docker run  或 <code>docker compose</code> 两种方式部署</p>
+<p>可以选择  <code>docker run</code> 或 <code>docker compose</code> 两种方式部署</p>
 <p>方法一：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ae81ff">docker run \</span>
 </span></span><span style="display:flex;"><span>--<span style="color:#ae81ff">name derper \</span>
@@ -284,7 +284,7 @@ DERP_DOMAIN：你的域名</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>,
 </span></span></code></pre></div><h2 id="测试">测试</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Tailscale netcheck
-</span></span></code></pre></div><p>看到有 VPS RegionName 即可</p>
+</span></span></code></pre></div><p>看到自己的 VPS RegionName 即可</p>
 <p>也可以 tailscale ping xxxx 测试一下</p>
 </section>
 
@@ -292,7 +292,7 @@ DERP_DOMAIN：你的域名</p>
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
 >
   <div class="mr-auto">&copy;2025
-    <a class="link" href="https://whitebalance.github.io/">whitebalance blog</a></div>
+    <a class="link" href="https://WhiteBalance2800K.github.io/">whitebalance blog</a></div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >powered by hugo️️</a
   >️
