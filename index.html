@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
+<html lang="zh-cn" dir="auto">
 
 <head>
 	<meta name="generator" content="Hugo 0.148.2"><meta charset="utf-8">
@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://WhiteBalance2800K.github.io/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.8f7b9ece9bb6776d52f51892008c8f030aaa6815a8d7d7fbe43f57dcf5b95699.css" integrity="sha256-j3uezpu2d21S9RiSAIyPAwqqaBWo19f75D9X3PW5Vpk=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.2819ac1f6a4a20a9ad89cef2ea13c09d2e593573c8ec58ee4a7e942279616643.css" integrity="sha256-KBmsH2pKIKmtic7y6hPAnS5ZNXPI7FjuSn6UInlhZkM=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://WhiteBalance2800K.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://WhiteBalance2800K.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://WhiteBalance2800K.github.io/favicon-32x32.png">
@@ -20,7 +20,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <link rel="alternate" type="application/rss+xml" href="https://WhiteBalance2800K.github.io/index.xml">
-<link rel="alternate" hreflang="en" href="https://WhiteBalance2800K.github.io/">
+<link rel="alternate" hreflang="zh-cn" href="https://WhiteBalance2800K.github.io/">
 <noscript>
     <style>
         #theme-toggle,
@@ -60,7 +60,7 @@
 </noscript><meta property="og:url" content="https://WhiteBalance2800K.github.io/">
   <meta property="og:site_name" content="whitebalance blog">
   <meta property="og:title" content="whitebalance blog">
-  <meta property="og:locale" content="zh-cn">
+  <meta property="og:locale" content="zh-CN">
   <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="whitebalance blog">
@@ -133,8 +133,7 @@
   </header>
   <div class="entry-content">
     <p>在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
-前置准备 需要：
-Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale
+前置准备 Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale
 # 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署
 方法一： docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \ -e DERP_STUN=true \ -e DERP_VERIFY_CLIENTS=true \ -v /root/.acme.sh/123.com_ecc/:/app/certs \ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \ -p 23443:443 \ -p 2380:80 \ -p 3478:3478/udp \ fredliang/derper 参数说明:
 ...</p>

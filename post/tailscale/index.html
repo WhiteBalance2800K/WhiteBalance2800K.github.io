@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
+<html lang="zh-cn" dir="auto">
 
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,6 @@
 <meta name="description" content="在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
 
 前置准备
-需要：
 
 Tailscale 账户（用于身份认证和管理）
 域名（纯 IP DERP 中继无法防止白嫖）
@@ -43,7 +42,7 @@ fredliang/derper
 参数说明:">
 <meta name="author" content="">
 <link rel="canonical" href="https://WhiteBalance2800K.github.io/post/tailscale/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.8f7b9ece9bb6776d52f51892008c8f030aaa6815a8d7d7fbe43f57dcf5b95699.css" integrity="sha256-j3uezpu2d21S9RiSAIyPAwqqaBWo19f75D9X3PW5Vpk=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.2819ac1f6a4a20a9ad89cef2ea13c09d2e593573c8ec58ee4a7e942279616643.css" integrity="sha256-KBmsH2pKIKmtic7y6hPAnS5ZNXPI7FjuSn6UInlhZkM=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://WhiteBalance2800K.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://WhiteBalance2800K.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://WhiteBalance2800K.github.io/favicon-32x32.png">
@@ -51,7 +50,7 @@ fredliang/derper
 <link rel="mask-icon" href="https://WhiteBalance2800K.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://WhiteBalance2800K.github.io/post/tailscale/">
+<link rel="alternate" hreflang="zh-cn" href="https://WhiteBalance2800K.github.io/post/tailscale/">
 <noscript>
     <style>
         #theme-toggle,
@@ -92,11 +91,10 @@ fredliang/derper
   <meta property="og:site_name" content="whitebalance blog">
   <meta property="og:title" content="VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容">
   <meta property="og:description" content="在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
-前置准备 需要：
-Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale
+前置准备 Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale
 # 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署
 方法一： docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \ -e DERP_STUN=true \ -e DERP_VERIFY_CLIENTS=true \ -v /root/.acme.sh/123.com_ecc/:/app/certs \ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \ -p 23443:443 \ -p 2380:80 \ -p 3478:3478/udp \ fredliang/derper 参数说明:">
-  <meta property="og:locale" content="zh-cn">
+  <meta property="og:locale" content="zh-CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
     <meta property="article:published_time" content="2025-08-19T10:11:04+08:00">
@@ -106,7 +104,6 @@ Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无
 <meta name="twitter:description" content="在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
 
 前置准备
-需要：
 
 Tailscale 账户（用于身份认证和管理）
 域名（纯 IP DERP 中继无法防止白嫖）
@@ -165,13 +162,13 @@ fredliang/derper
   "@type": "BlogPosting",
   "headline": "VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容",
   "name": "VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容",
-  "description": "在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。\n前置准备 需要：\nTailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let\u0026rsquo;s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale\n# 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署\n方法一： docker run \\ --name derper \\ -e DERP_DOMAIN=123.com \\ -e DERP_CERT_MODE=manual \\ -e DERP_STUN=true \\ -e DERP_VERIFY_CLIENTS=true \\ -v /root/.acme.sh/123.com_ecc/:/app/certs \\ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \\ -p 23443:443 \\ -p 2380:80 \\ -p 3478:3478/udp \\ fredliang/derper 参数说明:\n",
+  "description": "在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。\n前置准备 Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let\u0026rsquo;s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale\n# 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署\n方法一： docker run \\ --name derper \\ -e DERP_DOMAIN=123.com \\ -e DERP_CERT_MODE=manual \\ -e DERP_STUN=true \\ -e DERP_VERIFY_CLIENTS=true \\ -v /root/.acme.sh/123.com_ecc/:/app/certs \\ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \\ -p 23443:443 \\ -p 2380:80 \\ -p 3478:3478/udp \\ fredliang/derper 参数说明:\n",
   "keywords": [
     
   ],
-  "articleBody": "在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。\n前置准备 需要：\nTailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale\n# 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署\n方法一： docker run \\ --name derper \\ -e DERP_DOMAIN=123.com \\ -e DERP_CERT_MODE=manual \\ -e DERP_STUN=true \\ -e DERP_VERIFY_CLIENTS=true \\ -v /root/.acme.sh/123.com_ecc/:/app/certs \\ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \\ -p 23443:443 \\ -p 2380:80 \\ -p 3478:3478/udp \\ fredliang/derper 参数说明:\nDERP_DOMAIN 你的域名\nDERP_CERT_MODE=manual手动证书模式\nDERP_STUN=true开启 STUN\nDERP_VERIFY_CLIENTS=true 验证客户端身份，防止被白嫖\n-v 证书路径、Tailscale socket\n-p 端口映射：3478（UDP 最好不要修改），Derper 必须要 443 和 80 端口，而这些端口很容易被网站、Trojan 代理占用，所以使用 Docker 部署，可以自定义为 23443、2380 或其他\n方法二：使用 Docker Compose services: derper: image: fredliang/derper environment: - DERP_DOMAIN=123.com - DERP_CERT_MODE=manual - DERP_STUN=true - DERP_VERIFY_CLIENTS=true volumes: - /root/.acme.sh/123.com_ecc/:/app/certs - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock ports: - 12443:443 - 1280:80 - 3478:3478/udp 启动服务： docker compose up -d\n注意：容器内 derper 默认会找 xxx.crt 和 xxx.key，但实际可能只有 .cer 文件\n解决方法：\nls -l /root/.acme.sh/123.com_ecc/ 找到 fullchain.cer 软连接：\nln -s fullchain.cer 123.com.crt 再次启动容器\nStep 3: 进入 Tailscale 控制台 - Access controls，选择 JSON editor 模式，修改 或 新增 derpMap 记得提前保存 Tailscale ACL 原配置，以防 bug\n\"derpMap\": { \"OmitDefaultRegions\": true, // 设置为 True 则丢弃所有 Tailscale 官方中转节点 \"Regions\": { \"900\": { \"RegionID\": 900, // tailscale 900-999 是保留给自定义 derper \"RegionCode\": \"HK\", // 随便命名 \"RegionName\": \"HK123\", // 随便命名 \"Nodes\": [ { \"Name\": \"AAA\", // 随便命名 \"RegionID\": 900, \"Hostname\": \"123.com\", // 你的 VPS 域名 \"DERPPort\": 23443, //上面 Docker 自定义的端口 \"InsecureForTests\": true, // 因为是自签名证书，所以客户端不做校验 }, ], }, }, }, 测试 tailscale netcheck 看到自己的 VPS RegionName 即可\n也可以 tailscale ping xxxx 测试一下\n",
-  "wordCount" : "261",
-  "inLanguage": "en",
+  "articleBody": "在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。\n前置准备 Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale\n# 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署\n方法一： docker run \\ --name derper \\ -e DERP_DOMAIN=123.com \\ -e DERP_CERT_MODE=manual \\ -e DERP_STUN=true \\ -e DERP_VERIFY_CLIENTS=true \\ -v /root/.acme.sh/123.com_ecc/:/app/certs \\ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \\ -p 23443:443 \\ -p 2380:80 \\ -p 3478:3478/udp \\ fredliang/derper 参数说明:\nDERP_DOMAIN 你的域名\nDERP_CERT_MODE=manual手动证书模式\nDERP_STUN=true开启 STUN\nDERP_VERIFY_CLIENTS=true 验证客户端身份，防止被白嫖\n-v 证书路径、Tailscale socket\n-p 端口映射：3478（UDP 最好不要修改），Derper 必须要 443 和 80 端口，而这些端口很容易被网站、Trojan 代理占用，所以使用 Docker 部署，可以自定义为 23443、2380 或其他\n方法二：使用 Docker Compose services: derper: image: fredliang/derper environment: - DERP_DOMAIN=123.com - DERP_CERT_MODE=manual - DERP_STUN=true - DERP_VERIFY_CLIENTS=true volumes: - /root/.acme.sh/123.com_ecc/:/app/certs - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock ports: - 12443:443 - 1280:80 - 3478:3478/udp 启动服务： docker compose up -d\n注意：容器内 derper 默认会找 xxx.crt 和 xxx.key，但实际可能只有 .cer 文件\n解决方法：\nls -l /root/.acme.sh/123.com_ecc/ 找到 fullchain.cer 进行软连接：\nln -s fullchain.cer 123.com.crt 再次启动容器\nStep 3: 进入 Tailscale 控制台 - Access controls，选择 JSON editor 模式，修改 或 新增 derpMap 记得提前保存 Tailscale ACL 原配置，以防 bug\n\"derpMap\": { \"OmitDefaultRegions\": true, // 设置为 True 则丢弃所有 Tailscale 官方中转节点 \"Regions\": { \"900\": { \"RegionID\": 900, // tailscale 900-999 是保留给自定义 derper \"RegionCode\": \"HK\", // 随便命名 \"RegionName\": \"HK123\", // 随便命名 \"Nodes\": [ { \"Name\": \"AAA\", // 随便命名 \"RegionID\": 900, \"Hostname\": \"123.com\", // 你的 VPS 域名 \"DERPPort\": 23443, //上面 Docker 自定义的端口 \"InsecureForTests\": true, // 因为是自签名证书，所以客户端不做校验 }, ], }, }, }, 测试 tailscale netcheck 看到自己的 VPS RegionName 即可\n也可以 tailscale ping xxxx 测试一下\n",
+  "wordCount" : "260",
+  "inLanguage": "zh-cn",
   "datePublished": "2025-08-19T10:11:04+08:00",
   "dateModified": "2025-08-19T10:11:04+08:00",
   "mainEntityOfPage": {
@@ -271,7 +268,6 @@ fredliang/derper
   <div class="post-content"><p>在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 <strong>自建 DERP 节点</strong>，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。</p>
 <hr>
 <h2 id="前置准备">前置准备<a hidden class="anchor" aria-hidden="true" href="#前置准备">#</a></h2>
-<p>需要：</p>
 <ul>
 <li><strong>Tailscale 账户</strong>（用于身份认证和管理）</li>
 <li><strong>域名</strong>（纯 IP DERP 中继无法防止白嫖）</li>
@@ -302,12 +298,13 @@ fredliang/derper
 </span></span><span style="display:flex;"><span>-<span style="color:#ae81ff">p 3478:3478/udp \</span>
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">fredliang/derper</span>
 </span></span></code></pre></div><p>参数说明:</p>
+<blockquote>
 <p><code>DERP_DOMAIN</code> 你的域名</p>
 <p><code>DERP_CERT_MODE=manual</code>手动证书模式</p>
 <p><code>DERP_STUN=true</code>开启 STUN</p>
 <p><code>DERP_VERIFY_CLIENTS=true</code> 验证客户端身份，防止被白嫖</p>
 <p><code>-v</code> 证书路径、Tailscale socket</p>
-<p><code>-p</code> 端口映射：3478（UDP 最好不要修改），Derper 必须要 443 和 80 端口，而这些端口很容易被网站、Trojan 代理占用，所以使用 Docker 部署，可以自定义为 23443、2380 或其他</p>
+<p><code>-p</code> 端口映射：<code>3478</code>（UDP 最好不要修改），Derper 必须要 <code>443</code> 和 <code>80</code> 端口，而这些端口很容易被网站、Trojan 代理占用，所以使用 Docker 部署，可以自定义为 <code>23443</code>、<code>2380</code> 或其他</p></blockquote>
 <h3 id="方法二使用-docker-compose">方法二：使用 Docker Compose<a hidden class="anchor" aria-hidden="true" href="#方法二使用-docker-compose">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">derper</span>:
@@ -329,7 +326,7 @@ fredliang/derper
 <p>解决方法：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#ae81ff">ls -l /root/.acme.sh/123.com_ecc/</span>
 </span></span></code></pre></div><p>找到 fullchain.cer
-软连接：</p>
+进行软连接：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#ae81ff">ln -s fullchain.cer 123.com.crt</span>
 </span></span></code></pre></div><p><strong>再次启动容器</strong></p>
 <hr>
