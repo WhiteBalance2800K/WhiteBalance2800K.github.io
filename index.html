@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://WhiteBalance2800K.github.io/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d261a4fc17f2c87bad66d6e797886fb34c8482ee42039ef7d708ac2713bef7c4.css" integrity="sha256-0mGk/BfyyHutZtbnl4hvs0yEgu5CA5731wisJxO&#43;98Q=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.982b0d378731726aaa6c45bc5d87462e34492f5d40b29ac6d0bad5588c3de8f0.css" integrity="sha256-mCsNN4cxcmqqbEW8XYdGLjRJL11AsprG0LrVWIw96PA=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://WhiteBalance2800K.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://WhiteBalance2800K.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://WhiteBalance2800K.github.io/favicon-32x32.png">
@@ -124,6 +124,11 @@
         </ul>
     </nav>
 </header>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 <main class="main"> 
 
 <article class="first-entry"> 
@@ -132,14 +137,14 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
+    <p> 在一些网络环境下，Tailscale 的官方 DERP 中继可能不稳定或者延迟较高。本文介绍如何在 VPS 上部署 自建 DERP 节点，以便通过 Tailscale 提供更快更稳定的中继服务，并实现 Trojan 代理共存。
 前置准备 Tailscale 账户（用于身份认证和管理） 域名（纯 IP DERP 中继无法防止白嫖） Let’s Encrypt / acme.sh 证书（用于 HTTPS） Step 1：在 VPS 上安装 Tailscale 首先，在 VPS 上安装并启动 Tailscale
 # 安装 Tailscale curl -fsSL https://tailscale.com/install.sh | sh # 启动并登录 tailscale up Step 2:使用 Docker 安装 Derper 可以选择 docker run 或 docker compose 两种方式部署
 方法一：使用默认 Docker docker run \ --name derper \ -e DERP_DOMAIN=123.com \ -e DERP_CERT_MODE=manual \ -e DERP_STUN=true \ -e DERP_VERIFY_CLIENTS=true \ -v /root/.acme.sh/123.com_ecc/:/app/certs \ -v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \ -p 23443:443 \ -p 2380:80 \ -p 3478:3478/udp \ fredliang/derper 参数说明:
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2025-08-19'>August 19, 2025</span>&nbsp;·&nbsp;<span title='2025-08-21'>更新于 August 21, 2025</span></footer>
-  <a class="entry-link" aria-label="post link to VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容" href="https://WhiteBalance2800K.github.io/post/tailscale/"></a>
+  <a class="entry-link" aria-label="post link to VPS 自建 Tailscale DERP 中继节点并与 Trojan 代理兼容" href="https://WhiteBalance2800K.github.io/post/tailscale&#43;self&#43;host/"></a>
 </article>
     </main>
     
